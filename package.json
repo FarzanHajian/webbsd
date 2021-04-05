@@ -1,0 +1,26 @@
+{
+  "name": "webbsd",
+  "version": "1.0.0",
+  "description": "Bottom Sheet Dialog for Web",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "bsd"
+  ],
+  "author": "Farzan Hajian",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^5.0.0",
+    "tinyify": "^3.0.0",
+    "tsify": "^5.0.2",
+    "vinyl-source-stream": "^2.0.0",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "interactjs": "^1.10.11"
+  }
+}

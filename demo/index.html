@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebBSD demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 1. This is the stylesheet file required by WebBSD. -->
+    <link rel="stylesheet" href="../dist/webbsd.css">
+</head>
+
+<body onload="initialize()" style="background: white;">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur.
+
+        Pellentesque elit eget gravida cum. Porta lorem mollis aliquam ut porttitor leo a diam sollicitudin. Diam ut
+        venenatis tellus in metus vulputate eu. Ipsum dolor sit amet consectetur adipiscing elit. Amet massa vitae
+        tortor condimentum lacinia quis vel eros donec. Ultrices mi tempus imperdiet nulla malesuada pellentesque elit
+        eget. Nisl vel pretium lectus quam id leo in vitae turpis. Pharetra convallis posuere morbi leo urna molestie at
+        elementum. Varius morbi enim nunc faucibus. Consectetur adipiscing elit ut aliquam purus sit amet. Venenatis
+        tellus in metus vulputate eu scelerisque felis. Enim tortor at auctor urna nunc id. Lobortis mattis aliquam
+        faucibus purus in massa tempor. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Nulla facilisi.
+    </p>
+    <button onclick="openModal()">Open Modal</button>
+    <button onclick="toggleModeless()">Toggle Modeless</button>
+    <button onclick="randomHeight()">Random Height</button>
+    <footer style="height: 50px;background-color: rgb(35, 5, 63); position:fixed; bottom: 0;width: 100%;left:0">
+    </footer>
+
+    <div id="bsd"></div>
+
+    <!-- 2. This is the JavaScript file required by WebBSD. -->
+    <script src="../dist/webbsd.js" async defer></script>
+
+    <script>
+        const html = `
+                <p style='font-size:21px; text-align:justify'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+                    Pellentesque elit eget gravida cum. Porta lorem mollis aliquam
+                    ut porttitor leo a diam sollicitudin. Diam ut venenatis tellus
+                    in metus vulputate eu. Ipsum dolor sit amet consectetur adipiscing
+                    elit. Amet massa vitae tortor condimentum lacinia quis vel eros
+                    donec. Ultrices mi tempus imperdiet nulla malesuada pellentesque
+                    elit eget. Nisl vel pretium lectus quam id leo in vitae turpis.
+                    Pharetra convallis posuere morbi leo urna molestie at elementum.
+                    Varius morbi enim nunc faucibus. Consectetur adipiscing elit ut
+                    aliquam purus sit amet. Venenatis tellus in metus vulputate eu
+                    scelerisque felis. Enim tortor at auctor urna nunc id. Lobortis
+                    mattis aliquam faucibus purus in massa tempor. Facilisi cras
+                    fermentum odio eu feugiat pretium nibh ipsum. Nulla facilisi.
+                </p>
+                <p style='font-size:21px; text-align:justify; margin-top:150px'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+                    Pellentesque elit eget gravida cum. Porta lorem mollis aliquam
+                    ut porttitor leo a diam sollicitudin. Diam ut venenatis tellus
+                    in metus vulputate eu. Ipsum dolor sit amet consectetur adipiscing
+                    elit. Amet massa vitae tortor condimentum lacinia quis vel eros
+                    donec. Ultrices mi tempus imperdiet nulla malesuada pellentesque
+                    elit eget. Nisl vel pretium lectus quam id leo in vitae turpis.
+                    Pharetra convallis posuere morbi leo urna molestie at elementum.
+                    Varius morbi enim nunc faucibus. Consectetur adipiscing elit ut
+                    aliquam purus sit amet. Venenatis tellus in metus vulputate eu
+                    scelerisque felis. Enim tortor at auctor urna nunc id. Lobortis
+                    mattis aliquam faucibus purus in massa tempor. Facilisi cras
+                    fermentum odio eu feugiat pretium nibh ipsum. Nulla facilisi.
+                </p>
+                `;
+        let bsd;
+
+        function initialize() {
+            // 3. Initializing the sole instance of our BSD. You should create the instance
+            //    once and use the same during the entire application run time.
+            bsd = webbsd.BottomSheetDialog.createInstance("bsd");
+        }
+
+        function openModal() {
+            // 4. Opening the BSD in modal and showing an HTML inside it. Modal BSDs
+            //    cover the entire page and can be closed by clicking outside them.
+            bsd.showContent(html);
+        }
+
+        function toggleModeless() {
+            // 5. Woking with modeless BSDs. They do not cover the entire page can can
+            //    be closed by code.
+            if (bsd.isOpen) {
+                bsd.hide();
+            } else {
+                // 6. You can set options when creating the BSD instance (the second argument of
+                //    createInstance method accepts an options object). This affects everytime
+                //    the BSD is about to appear.
+                //    Conversely you have the option to override initial options for every BSD
+                //    show. (showContent and toggle methods both accept options object).
+                //    Options objects are of type BsdOptions.
+                bsd.showContent(html, { height: "200px", isModeless: true, offset: "50px" });
+            }
+        }
+
+        function randomHeight() {
+            if (bsd.isOpen) {
+                const height = Math.floor(Math.random() * (800 - 350)) + 350;
+                bsd.setHeight(`${height}px`)
+            }
+        }
+    </script>
+</body>
+
+</html>

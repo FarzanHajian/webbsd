@@ -1,0 +1,85 @@
+.bsd-overlay {
+    --duration: 450ms;
+
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 9999;
+    transition: all var(--duration) cubic-bezier(0.32, 1, 0.23, 1) 0ms;
+
+    .bsd-popup {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 0px 15px;
+        background-color: var(--bgColor);
+        outline: none;
+        color: white;
+        box-sizing: border-box;
+        touch-action: none;
+        transform: translate(0, 100%);
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        min-height: 100px;
+        transition: all var(--duration) cubic-bezier(0.32, 1, 0.23, 1) 0ms;
+        display: grid;
+        grid-template-rows: 25px fit-content(100%);
+        justify-items: center;
+
+        .bsd-resize-handle {
+            height: 5px;
+            width: 30px;
+            margin: 10px 0px;
+            border-radius: 4px;
+            background-color: var(--handleColor);
+            grid-row: 1;
+        }
+
+        .bsd-content {
+            grid-row: 2;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    }
+
+    &.modeless {
+        transition: all var(--duration) cubic-bezier(0.32, 1, 0.23, 1) 0ms, background-color 0s;
+    }
+
+    &.open {
+        opacity: 1;
+        top: 0;
+        bottom: var(--offset);
+
+        .bsd-popup {
+            box-shadow: 0px -10px 50px rgba(0, 0, 0, 0.22), 0px 14px 56px rgba(0, 0, 0, 0.25);
+            transform: translate(0, 0);
+            z-index: 9;
+        }
+
+        .bsd-close-button {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        &.modeless {
+            top: calc(var(--popup-top) - 5px);
+            background-color: transparent;
+
+            .bsd-close-button {
+                display: none;
+            }
+
+            &.resizing {
+                top: 0;
+            }
+        }
+    }
+}
