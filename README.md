@@ -7,6 +7,7 @@ It is built based on https://codepen.io/pixelasticity/pen/ZQGyYP
 You have to include the following files in your HTML
 - webbsd.js
 - webbsd.css
+
 They can be found inside "dist" directory.
 
 ## Usage

@@ -21,7 +21,7 @@ function defaultTask(cb) {
         .pipe(dest('dist'));
 
     src('src/webbsd.scss')
-        .pipe(sass())
+        .pipe(sass({ outputStyle: 'compressed' }))
         .pipe(dest('dist'));
 
     cb();
